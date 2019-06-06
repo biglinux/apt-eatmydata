@@ -1,0 +1,7 @@
+#!/bin/sh
+
+if [ "$(findmnt -n -o FSTYPE -T /)" = "btrfs" ]; then
+    eatmydata /usr/bin/apt.distrib "$@"
+else
+    /usr/bin/apt.distrib "$@"
+fi

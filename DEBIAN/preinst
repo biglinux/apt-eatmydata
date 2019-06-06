@@ -1,0 +1,40 @@
+#!/bin/sh
+set -e
+package_name=apt-eatmydata
+case "$1" in
+  install)
+if [ "$(dpkg-divert --list "/usr/bin/apt")" = "" ]
+then
+    dpkg-divert --package "$package_name" --divert "/usr/bin/apt.distrib" --rename "/usr/bin/apt"
+fi
+
+if [ "$(dpkg-divert --list "/usr/bin/apt-get")" = "" ]
+then
+    dpkg-divert --package "$package_name" --divert "/usr/bin/apt-get.distrib" --rename "/usr/bin/apt-get"
+fi
+
+if [ "$(dpkg-divert --list "/usr/bin/dpkg")" = "" ]
+then
+    dpkg-divert --package "$package_name" --divert "/usr/bin/dpkg.distrib" --rename "/usr/bin/dpkg"
+fi
+
+    ;;
+  upgrade)
+if [ "$(dpkg-divert --list "/usr/bin/apt")" = "" ]
+then
+    dpkg-divert --package "$package_name" --divert "/usr/bin/apt.distrib" --rename "/usr/bin/apt"
+fi
+
+if [ "$(dpkg-divert --list "/usr/bin/apt-get")" = "" ]
+then
+    dpkg-divert --package "$package_name" --divert "/usr/bin/apt-get.distrib" --rename "/usr/bin/apt-get"
+fi
+
+if [ "$(dpkg-divert --list "/usr/bin/dpkg")" = "" ]
+then
+    dpkg-divert --package "$package_name" --divert "/usr/bin/dpkg.distrib" --rename "/usr/bin/dpkg"
+fi
+
+;;
+esac
+exit 0

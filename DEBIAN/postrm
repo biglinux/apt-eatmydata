@@ -1,0 +1,16 @@
+#!/bin/sh
+set -e
+package_name=apt-eatmydata
+case "$1" in
+  remove)
+    dpkg-divert --package "$package_name" --rename --remove "/usr/bin/apt"
+    dpkg-divert --package "$package_name" --rename --remove "/usr/bin/apt-get"
+    dpkg-divert --package "$package_name" --rename --remove "/usr/bin/dpkg"
+    ;;
+  purge)
+    dpkg-divert --package "$package_name" --rename --remove "/usr/bin/apt"
+    dpkg-divert --package "$package_name" --rename --remove "/usr/bin/apt-get"
+    dpkg-divert --package "$package_name" --rename --remove "/usr/bin/dpkg"
+;;
+esac
+exit 0
