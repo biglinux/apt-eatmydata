@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if [ "$(findmnt -n -o FSTYPE -T /)" = "btrfs" ]; then
+if [ "$(findmnt -n -o FSTYPE -T / 2> /dev/null)" = "btrfs" ]; then
     eatmydata /usr/bin/dpkg.distrib "$@"
 else
     /usr/bin/dpkg.distrib "$@"
